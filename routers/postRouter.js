@@ -1,35 +1,24 @@
 import express from "express";
+import controller from "../controller/postsController.js";
 
 const postsRouter = express.Router();
 
 //INDEX
-postsRouter.get("/", (req, res) => {
-  console.log("mostra tutti i post");
-});
+postsRouter.get("/", controller.index);
 
 //SHOW
-postsRouter.get("/:id", (req, res) => {
-  console.log("mostra un post");
-});
+postsRouter.get("/:id", controller.show);
 
 //STORE
-postsRouter.post("/", (req, res) => {
-  console.log("crea un post");
-});
+postsRouter.post("/", controller.store);
 
 //UPDATE
-postsRouter.put("/:id", (req, res) => {
-  console.log("modifica un post per intero");
-});
+postsRouter.put("/:id", controller.update);
 
 //MODIFY
-postsRouter.patch("/:id", (req, res) => {
-  console.log("modifica un post parzialmente");
-});
+postsRouter.patch("/:id", controller.modify);
 
 //DESTROY
-postsRouter.delete("/:id", (req, res) => {
-  console.log("elimina un post");
-});
+postsRouter.delete("/:id", controller.destroy);
 
 export default postsRouter;

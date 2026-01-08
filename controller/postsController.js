@@ -1,7 +1,19 @@
 import posts from "../data/posts.js";
 
 const index = (req, res) => {
-  res.json(posts);
+  const tagToFilter = req.query.tags;
+  const titleToFilter = req.query.titolo;
+
+  let filteredPosts = posts;
+  if (tagToFilter !== undefined) {
+    filteredPosts = posts.filter((p) => p.tags.includes(tagToFilter));
+  }
+  if (titleToFilter !== undefined) {
+    filteredPosts = filteredPosts.filter((p) =>
+      p.titolo.toLowerCase().includes(titleToFilter)
+    );
+  }
+  res.json(filteredPosts);
 };
 
 const show = (req, res) => {

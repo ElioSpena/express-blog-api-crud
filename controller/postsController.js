@@ -1,25 +1,25 @@
 const index = (req, res) => {
-  console.log("mostra tutti i post");
+  res.send("mostra tutti i post");
 };
 
 const show = (req, res) => {
-  console.log("mostra un post");
+  res.send("mostra un post");
 };
 
 const store = (req, res) => {
-  console.log("crea un post");
+  res.send("crea un post");
 };
 
 const update = (req, res) => {
-  console.log("modifica un post per intero");
+  res.send("modifica un post per intero");
 };
 
 const modify = (req, res) => {
-  console.log("modifica un post parzialmente");
+  res.send("modifica un post parzialmente");
 };
 
 const destroy = (req, res) => {
-  console.log("elimina un post");
+  res.send("elimina un post");
 };
 
 const controller = { index, show, store, update, modify, destroy };

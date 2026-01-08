@@ -11,7 +11,12 @@ const show = (req, res) => {
 };
 
 const store = (req, res) => {
-  res.send("crea un post");
+  const newPost = req.body;
+  console.log(newPost);
+  newPost.id = posts[posts.length - 1].id + 1;
+  posts.push(newPost);
+  console.log(newPost);
+  res.send(`il post ${newPost.titolo} è stato creato`);
 };
 
 const update = (req, res) => {

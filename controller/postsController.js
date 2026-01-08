@@ -19,6 +19,13 @@ const index = (req, res) => {
 const show = (req, res) => {
   const id = parseInt(req.params.id);
   const post = posts.find((p) => p.id === id);
+  if (post === undefined) {
+    res.status(404);
+    res.json({
+      error: "404 not found",
+      message: "post non trovato",
+    });
+  }
   res.json(post);
 };
 
@@ -34,6 +41,15 @@ const update = (req, res) => {
   const id = parseInt(req.params.id);
   const newPost = req.body;
   const postToUpdate = posts.find((p) => p.id === id);
+
+  if (postToUpdate === undefined) {
+    res.status(404);
+    res.json({
+      error: "404 not found",
+      message: "post non trovato",
+    });
+  }
+
   const updatedPost = {
     id: id,
     titolo: newPost.titolo,
@@ -41,6 +57,7 @@ const update = (req, res) => {
     immagine: newPost.immagine,
     tags: newPost.tags,
   };
+
   posts.splice(posts.indexOf(postToUpdate), 1, updatedPost);
 
   res.send(`modifica il post ${newPost.titolo} per intero`);
@@ -53,6 +70,13 @@ const modify = (req, res) => {
 const destroy = (req, res) => {
   const id = parseInt(req.params.id);
   const post = posts.find((p) => p.id === id);
+  if (post === undefined) {
+    res.status(404);
+    res.json({
+      error: "404 not found",
+      message: "post non esistente",
+    });
+  }
   posts.splice(posts.indexOf(post), 1);
 
   console.log(`il post ${id} è stato eliminato`);

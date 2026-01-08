@@ -12,7 +12,6 @@ const show = (req, res) => {
 
 const store = (req, res) => {
   const newPost = req.body;
-  console.log(newPost);
   newPost.id = posts[posts.length - 1].id + 1;
   posts.push(newPost);
   console.log(newPost);
@@ -20,7 +19,19 @@ const store = (req, res) => {
 };
 
 const update = (req, res) => {
-  res.send("modifica un post per intero");
+  const id = parseInt(req.params.id);
+  const newPost = req.body;
+  const postToUpdate = posts.find((p) => p.id === id);
+  const updatedPost = {
+    id: id,
+    titolo: newPost.titolo,
+    contenuto: newPost.contenuto,
+    immagine: newPost.immagine,
+    tags: newPost.tags,
+  };
+  posts.splice(posts.indexOf(postToUpdate), 1, updatedPost);
+
+  res.send(`modifica il post ${newPost.titolo} per intero`);
 };
 
 const modify = (req, res) => {

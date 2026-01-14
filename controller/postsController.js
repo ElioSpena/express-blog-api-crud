@@ -19,13 +19,6 @@ const index = (req, res) => {
 const show = (req, res) => {
   const id = parseInt(req.params.id);
   const post = posts.find((p) => p.id === id);
-  if (post === undefined) {
-    res.status(404);
-    res.json({
-      error: "404 not found",
-      message: "post non trovato",
-    });
-  }
   res.json(post);
 };
 
@@ -34,21 +27,15 @@ const store = (req, res) => {
   newPost.id = posts[posts.length - 1].id + 1;
   posts.push(newPost);
   console.log(newPost);
-  res.send(`il post ${newPost.titolo} è stato creato`);
+  res.status(201); //è stato creato
+
+  res.json(newPost);
 };
 
 const update = (req, res) => {
   const id = parseInt(req.params.id);
   const newPost = req.body;
   const postToUpdate = posts.find((p) => p.id === id);
-
-  if (postToUpdate === undefined) {
-    res.status(404);
-    res.json({
-      error: "404 not found",
-      message: "post non trovato",
-    });
-  }
 
   const updatedPost = {
     id: id,
@@ -70,13 +57,7 @@ const modify = (req, res) => {
 const destroy = (req, res) => {
   const id = parseInt(req.params.id);
   const post = posts.find((p) => p.id === id);
-  if (post === undefined) {
-    res.status(404);
-    res.json({
-      error: "404 not found",
-      message: "post non esistente",
-    });
-  }
+
   posts.splice(posts.indexOf(post), 1);
 
   console.log(`il post ${id} è stato eliminato`);

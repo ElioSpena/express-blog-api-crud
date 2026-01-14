@@ -1,5 +1,6 @@
 import express from "express";
 import controller from "../controller/postsController.js";
+import checkID from "../middlewares/checkID.js";
 
 const postsRouter = express.Router();
 
@@ -7,18 +8,18 @@ const postsRouter = express.Router();
 postsRouter.get("/", controller.index);
 
 //SHOW
-postsRouter.get("/:id", controller.show);
+postsRouter.get("/:id", checkID, controller.show);
 
 //STORE
 postsRouter.post("/", controller.store);
 
 //UPDATE
-postsRouter.put("/:id", controller.update);
+postsRouter.put("/:id", checkID, controller.update);
 
 //MODIFY
-postsRouter.patch("/:id", controller.modify);
+postsRouter.patch("/:id", checkID, controller.modify);
 
 //DESTROY
-postsRouter.delete("/:id", controller.destroy);
+postsRouter.delete("/:id", checkID, controller.destroy);
 
 export default postsRouter;
